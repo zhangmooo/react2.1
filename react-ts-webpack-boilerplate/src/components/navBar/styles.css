@@ -1,0 +1,95 @@
+.navbar{
+    background-color: var(  --yellow-theme-background-color);
+    height: 80px;
+    display: flex;
+    justify-content: cneter;
+    align-items: center;
+    font-size: 1.2rem;
+    /*rem是相对于根元素*/
+   
+    &__container{
+        display: flex;
+        align-items:center;
+        width: 100%;
+        height:inherit;/*继承父元素的高度*/
+        padding:0px 20px;
+        flex:1;
+
+        &__logo{
+            color:var(--yellow-theme-main-color);
+            cursor:pointer;/*光标移动上去会变手*/
+        }
+
+        &__menu{
+            display: flex;
+            list-style:none;
+            text-align: center;
+
+            &__item{
+                item-height:40px;
+                margin-right:1.5rem;
+                font-size:1.6rem;
+/*after是伪元素，hover/after是鼠标移动上面时候的样式*/
+                
+
+                &::after{
+                    content:'';
+                    display:block;
+                    height: 3px;
+                    width: 0;
+                    background: transparent;/*背景为透明*/
+                    transition: all 0.5s ease;
+                } 
+
+                &:hover::after{
+                    width: 100%;
+                    background: var(--yellow-theme-main-color);
+                }
+
+                &__links{
+                    color:var(--yellow-theme-main-color);
+                    text-decoration:none;/* 移除下划线*/
+                    padding: 0.5rem;
+                }
+            }
+        }
+    }
+}
+
+.nav-icon{
+    display:none;
+}
+
+@media only screen and (max-width : 768px){
+   .navbar__container__menu{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        position:absolute;
+        top: 80px;
+        left:-110%;
+        opacity: 1; 
+        /*透明度唯一（完全不透明）*/
+        transition: all 0.5s ease;
+
+        &.active{
+            background:black;
+            left:0px;
+            /*index中的条件成立，active会启动从而控制父元素的设置*/
+            opacity: 1;
+        }
+
+        &__item{
+            border-bottom:1px solid #282828;
+            margin:0px;
+            padding:20px 0px;
+        }
+    }
+    .nav-icon{
+        display: block;
+        cursor: pointer;
+        color:var(--yellow-theme-main-color);
+        padding-right: 20px;
+    }
+}
